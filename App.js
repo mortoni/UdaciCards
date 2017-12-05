@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { cerulean, oxfordBlue, white } from './utils/colors';
-import { Constants } from 'expo';
+import { Constants, AppLoading } from 'expo';
 import { Root } from 'native-base';
 import { FontAwesome } from '@expo/vector-icons';
 import { Provider } from 'react-redux';
@@ -18,20 +18,26 @@ class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true
+            loading: true,
+            error: null
         }
         this.store = null;
         this.unmountStore = () => {};
     }
 
     componentDidMount() {
-        this.setState({ loading: false })
+        // this.setState({ loading: false })
     }
 
     async componentWillMount() {
-        const { store, unmountStore } = await initStore()
-        this.store = store
-        this.unmountStore = unmountStore
+        try {
+            const { store, unmountStore } = await initStore()
+            this.store = store
+            this.unmountStore = unmountStore
+            this.setState({ loading: false })
+        } catch (e) {
+            this.setState({ error: e.message });
+        }
     }
 
     componentWillUnmount() {
@@ -39,18 +45,23 @@ class App extends Component {
     }
 
     render() {
-        const { loading } = this.state
+        const { loading, error } = this.state
+        const store = this.store
 
         return (
-            <Provider store={this.store}>
-                <View style={{flex: 1, backgroundColor: oxfordBlue}}>
-                    <MyBar barStyle='light-content' />
+            error ?
+            <Text>error</Text> :
+                loading ?
+                <AppLoading /> :
+                <Provider store={ store }>
+                    <View style={{flex: 1, backgroundColor: oxfordBlue}}>
+                        <MyBar barStyle='light-content' />
 
-                    <Root>
-                        <StackNav />
-                    </Root>
-                </View>
-            </Provider>
+                        <Root>
+                            <StackNav />
+                        </Root>
+                    </View>
+                </Provider>
         )
     }
 }
