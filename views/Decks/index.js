@@ -24,7 +24,7 @@ const Decks = (props) => {
                 renderItem={({item: deck}) =>
                     <TouchableOpacity
                         style={styles.deck}
-                        onPress={() => this.onPressDeck(deck)}>
+                        onPress={() => this.onSelectDeck(deck)}>
 
                         <DeckItem {...deck} />
 
