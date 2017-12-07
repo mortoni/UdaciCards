@@ -2,21 +2,20 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Container from '../../components/Container';
 import { styles } from './styles'
-
+import { connect } from 'react-redux';
 import DeckDetails from '../../components/DeckDetails';
 import NewCard from '../NewCard';
-
+import Quiz from '../Quiz';
 
 const Deck = (props) => {
-
-    let { deck } = props.navigation.state.params
+    const { deck } = props
 
     function addCard() {
         props.navigation.navigate('NewCard', { deck });
     }
 
     function startQuiz() {
-
+        props.navigation.navigate('Quiz', { deck });
     }
 
     return(
@@ -40,4 +39,11 @@ const Deck = (props) => {
     )
 }
 
-export default Deck
+const mapStateToProps = (state, { navigation }) => {
+    let { id } = navigation.state.params.deck;
+    if (id === 'latest') id = state.deck.lastId;
+    const deck = state.deck.refById[id];
+    return { deck };
+}
+
+export default connect(mapStateToProps)(Deck);

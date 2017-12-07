@@ -13,6 +13,7 @@ import Deck from './views/Deck';
 import Decks from './views/Decks';
 import NewDeck from './views/NewDeck';
 import NewCard from './views/NewCard';
+import Quiz from './views/Quiz';
 
 class App extends Component {
 
@@ -88,7 +89,7 @@ const Tabs = TabNavigator(
                 tabBarLabel: 'New Deck',
                 tabBarIcon: () => <FontAwesome name="plus-square" size={40} color={oxfordBlue} />
             }
-        }
+        },
     }, {
         tabBarOptions: {
             activeTintColor: oxfordBlue,
@@ -125,6 +126,16 @@ const StackNav = StackNavigator({
         screen: NewCard,
         navigationOptions: {
             title: 'Add Card',
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: oxfordBlue,
+            },
+        }
+    },
+    Quiz: {
+        screen: Quiz,
+        navigationOptions: {
+            title: 'Quiz',
             headerTintColor: white,
             headerStyle: {
                 backgroundColor: oxfordBlue,
