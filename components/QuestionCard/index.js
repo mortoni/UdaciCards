@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'native-base';
 import { styles } from './styles'
+import Card from '../Card'
 
 const QuestionCard = (props) => {
     const {
@@ -16,7 +17,8 @@ const QuestionCard = (props) => {
     return (
         <View style={ styles.container }>
             <Text style={ styles.txtProgress }>Card: { progress }/{ total }</Text>
-            <View style={{ flex: 2, justifyContent: 'center' }}>
+            <View style={ styles.card }>
+                <Card {...card}/>
             </View>
 
             <View style={ styles.buttons }>

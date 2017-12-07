@@ -35,5 +35,9 @@ export const styles = StyleSheet.create({
       color: blueBayoux,
       fontSize: 22,
       textAlign: 'center',
+  },
+  card: {
+      flex: 2,
+      justifyContent: 'center'
   }
 })

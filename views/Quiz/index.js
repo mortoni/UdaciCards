@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import QuestionCard from '../../components/QuestionCard';
 import { styles } from './styles'
 import { View, Text } from 'react-native';
-
+import { connect } from 'react-redux';
 
 class Quiz extends Component {
 
@@ -11,30 +11,27 @@ class Quiz extends Component {
         this.state = {
             progress: 0,
             correctCount: 0,
-            cards: [],
-            deck: {}
+            cards: props.cards,
+            deck: props.deck,
         }
     }
 
+    onPressCorrect = () => {
+        const progress = this.state.progress + 1
+        const correctCount = this.state.correctCount + 1
 
-  componentDidMount(){
-      if(this.props.navigation.state.params){
-          const { deck } = this.props.navigation.state.params
-          this.setState({
-              progress: 0,
-              correctCount: 0,
-              cards: deck.cards,
-              deck
-          })
-      }
-  }
-
-  onPressCorrect = () => {
-      //TODO
-  }
+        this.setState({
+            progress,
+            correctCount
+        })
+    }
 
   onPressIncorrect = () => {
-      // TODO
+      const progress = this.state.progress + 1
+
+      this.setState({
+          progress
+      })
   }
 
   render() {
@@ -44,6 +41,7 @@ class Quiz extends Component {
 
       const isComplete = progress === total;
       const card = isComplete ? {} : cards[progress];
+
       return (
           <View style={styles.container}>
               <QuestionCard card={ card }
@@ -56,4 +54,15 @@ class Quiz extends Component {
   }
 }
 
-export default Quiz
+const mapDispatchToProps = (dispatch) => ({
+  addCardToDeck: (card, deck) => dispatch(addCardToDeck(card, deck)),
+})
+
+const mapStateToProps = (state, { navigation }) => {
+  let { id } = navigation.state.params.deck;
+  const deck = state.deck.refById[id];
+  const cards = deck.cards.map(cid => state.card.refById[cid]);
+  return { deck, cards };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
