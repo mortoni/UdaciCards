@@ -9,9 +9,8 @@ export const styles = StyleSheet.create({
     txtTitle: {
         marginTop: 10,
         marginBottom: 5,
-        fontSize: 16,
+        fontSize: 22,
         color: white,
-        fontWeight: '600',
         textAlign: 'center',
     },
     txtCount: {
@@ -19,7 +18,8 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
         fontSize: 13,
         color: cerulean,
-        fontWeight: '300',
+
+        fontWeight: '900',
         textAlign: 'center',
     }
 })
