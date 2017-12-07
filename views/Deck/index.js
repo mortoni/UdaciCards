@@ -4,11 +4,12 @@ import Container from '../../components/Container';
 import { styles } from './styles'
 
 import DeckDetails from '../../components/DeckDetails';
+import NewCard from '../NewCard';
 
 
 const Deck = (props) => {
 
-    const { deck } = props.navigation.state.params
+    let { deck } = props.navigation.state.params
 
     function addCard() {
         props.navigation.navigate('NewCard', { deck });

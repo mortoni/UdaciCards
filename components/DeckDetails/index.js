@@ -8,8 +8,8 @@ const DeckDetails = (props) => {
 
     return (
         <View style={[styles.container, style]}>
-            <Text style={styles.txtTitle}>{title}</Text>
-            <Text style={styles.txtCount}>{cards.length} cards</Text>
+            <Text style={styles.txtTitle}>{ title }</Text>
+            <Text style={styles.txtCount}>{ cards.length } cards</Text>
         </View>
     )
 }
