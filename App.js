@@ -12,7 +12,7 @@ import { initStore } from './store';
 import Deck from './views/Deck';
 import Decks from './views/Decks';
 import NewDeck from './views/NewDeck';
-import NewCard from './views/NewCard';
+import NewQuestion from './views/NewQuestion';
 import Quiz from './views/Quiz';
 
 class App extends Component {
@@ -122,8 +122,8 @@ const StackNav = StackNavigator({
             },
         })
     },
-    NewCard: {
-        screen: NewCard,
+    NewQuestion: {
+        screen: NewQuestion,
         navigationOptions: {
             title: 'Add Card',
             headerTintColor: white,

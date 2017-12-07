@@ -7,7 +7,7 @@ import { styles } from './styles'
 import { isNullOrBlank, checkStatus } from '../../utils';
 import { addCardToDeck } from '../../actions';
 
-class NewCard extends Component {
+class NewQuestion extends Component {
     state = {
         question: null,
         answer: null
@@ -70,4 +70,4 @@ const mapDispatchToProps = (dispatch) => ({
   addCardToDeck: (card, deck) => dispatch(addCardToDeck(card, deck)),
 })
 
-export default connect(() => ({}), mapDispatchToProps)(NewCard);
+export default connect(() => ({}), mapDispatchToProps)(NewQuestion);

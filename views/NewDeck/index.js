@@ -19,7 +19,14 @@ class NewDeck extends Component {
         const { title } = this.state;
         const deck = { title };
         this.props.addDeck(deck);
-        this.props.navigation.navigate('Home');
+        const navAction = NavigationActions.reset({
+            index: 1,
+            actions: [
+                NavigationActions.navigate({ routeName: 'Home', action: NavigationActions.navigate({ 'routeName': 'Decks' }) }),
+                NavigationActions.navigate({ routeName: 'Deck', params: { deck: { id: 'latest' } }}),
+            ]
+        });
+        this.props.navigation.dispatch(navAction);
     }
 
     render() {
@@ -30,14 +37,14 @@ class NewDeck extends Component {
                         <Label >What is the title of your new deck ?</Label>
                         <Input onChangeText={ title => this.setState({ title }) }/>
                     </Item>
-                </Form>
 
-                <View style={styles.buttons}>
-                    <TouchableOpacity style={styles.buttonCreate}
-                                      onPress={this.createDeck}>
-                        <Text style={styles.textCreate}>Add New Deck</Text>
-                    </TouchableOpacity>
-                </View>
+                    <View style={styles.buttons}>
+                        <TouchableOpacity style={styles.buttonCreate}
+                                          onPress={this.createDeck}>
+                            <Text style={styles.textCreate}>Add New Deck</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Form>
             </View>
         )
     }
