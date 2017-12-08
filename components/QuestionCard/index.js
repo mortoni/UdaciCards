@@ -23,7 +23,7 @@ const QuestionCard = (props) => {
 
             <View style={ styles.buttons }>
                 <TouchableOpacity style={ styles.button }
-                                  onPress={ onPressCorrect }>
+                                  onPress={ onPressIncorrect }>
                     <Text style={ styles.btnText }>Incorrect</Text>
                 </TouchableOpacity>
 

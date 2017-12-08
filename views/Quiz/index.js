@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import QuestionCard from '../../components/QuestionCard';
+import Report from '../../components/Report';
 import { styles } from './styles'
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
@@ -26,13 +27,20 @@ class Quiz extends Component {
         })
     }
 
-  onPressIncorrect = () => {
-      const progress = this.state.progress + 1
+    onPressIncorrect = () => {
+        const progress = this.state.progress + 1
 
-      this.setState({
-          progress
-      })
-  }
+        this.setState({
+            progress
+        })
+    }
+
+    reset = () => {
+        this.setState({
+            progress: 0,
+            correctCount: 0,
+        })
+    }
 
   render() {
       const { progress, deck, cards, correctCount } = this.state;
@@ -41,14 +49,21 @@ class Quiz extends Component {
 
       const isComplete = progress === total;
       const card = isComplete ? {} : cards[progress];
+      const score = Math.round((correctCount / total) * 100) ;
 
       return (
           <View style={styles.container}>
-              <QuestionCard card={ card }
-                            progress={ progress + 1 }
-                            total={ total }
-                            onPressCorrect={ this.onPressCorrect }
-                            onPressIncorrect={ this.onPressIncorrect } />
+              { isComplete
+                  ? <Report score={ score }
+                            reset={ this.reset }
+                            goBack={() => this.props.navigation.goBack()}/>
+                  : <QuestionCard card={ card }
+                                progress={ progress + 1 }
+                                total={ total }
+                                onPressCorrect={ this.onPressCorrect }
+                                onPressIncorrect={ this.onPressIncorrect } />
+
+              }
           </View>
       )
   }
