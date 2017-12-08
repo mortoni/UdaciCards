@@ -6,8 +6,8 @@ import { Constants, AppLoading } from 'expo';
 import { Root } from 'native-base';
 import { FontAwesome } from '@expo/vector-icons';
 import { Provider } from 'react-redux';
-
 import { initStore } from './store';
+import { setNotification } from './utils';
 
 import Deck from './views/Deck';
 import Decks from './views/Decks';
@@ -28,7 +28,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        // this.setState({ loading: false })
+        setNotification();
     }
 
     async componentWillMount() {
