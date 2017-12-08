@@ -31,6 +31,7 @@ const Deck = (props) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.buttonStartQuiz}
+                                  disabled={deck.cards.length === 0}
                                   onPress={startQuiz}>
                     <Text style={styles.submitBtnTextAdd}>Start Quiz</Text>
                 </TouchableOpacity>
