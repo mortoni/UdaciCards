@@ -12,6 +12,10 @@ class Card extends Component {
         }
     }
 
+    componentWillReceiveProps() {
+        this.setState({ showAnswer: false })
+    }
+
     static propTypes = {
         question: PropTypes.string.isRequired,
         answer: PropTypes.string.isRequired,
@@ -26,8 +30,8 @@ class Card extends Component {
                 <Text style={styles.question}>{ question }</Text>
                 { !showAnswer
 
-                    ? <TouchableOpacity style={styles.btnShowAnswer}
-                                      onPress={(showAnswer) => this.setState({showAnswer: true})}>
+                    ? <TouchableOpacity style={ styles.btnShowAnswer }
+                                      onPress={() => this.setState({ showAnswer: true })}>
                         <Text style={styles.textShowAnswer}>Show Answer</Text>
                     </TouchableOpacity>
 

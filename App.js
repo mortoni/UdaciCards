@@ -1,22 +1,15 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, Image } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
-import { cerulean, oxfordBlue, white } from './utils/colors';
-import { Constants, AppLoading } from 'expo';
-import { Root } from 'native-base';
-import { FontAwesome } from '@expo/vector-icons';
-import { Provider } from 'react-redux';
-import { initStore } from './store';
-import { setNotification } from './utils';
-
-import Deck from './views/Deck';
-import Decks from './views/Decks';
-import NewDeck from './views/NewDeck';
-import NewQuestion from './views/NewQuestion';
-import Quiz from './views/Quiz';
+import React, { Component } from 'react'
+import { Text, View, StatusBar } from 'react-native'
+import { cerulean, oxfordBlue } from './utils/colors'
+import { Constants, AppLoading } from 'expo'
+import { Root } from 'native-base'
+import { Provider } from 'react-redux'
+import { initStore } from './store'
+import { setNotification } from './utils'
+import Tabs from './components/Tabs'
+import StackNav from './components/StackNav'
 
 class App extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -73,75 +66,5 @@ const MyBar = ({ ...props }) => (
         <StatusBar translucent { ...props } />
     </View>
 )
-
-const Tabs = TabNavigator(
-    {
-        Decks: {
-            screen: Decks,
-            navigationOptions: {
-                tabBarLabel: 'Decks',
-                tabBarIcon: () => <FontAwesome name="bars" size={40} color={oxfordBlue} />
-            }
-        },
-        NewDeck: {
-            screen: NewDeck,
-            navigationOptions: {
-                tabBarLabel: 'New Deck',
-                tabBarIcon: () => <FontAwesome name="plus-square" size={40} color={oxfordBlue} />
-            }
-        },
-    }, {
-        tabBarOptions: {
-            activeTintColor: oxfordBlue,
-            style: {
-                height: 60,
-                backgroundColor: white,
-            }
-        }
-    }
-)
-
-const StackNav = StackNavigator({
-    Home: {
-        screen: Tabs,
-        navigationOptions: {
-            title: <Image source={require('./assets/udacity.png')} style={{width: 50, height:50}}/>,
-            headerTintColor: white,
-            headerStyle: {
-                backgroundColor: oxfordBlue,
-            },
-        }
-    },
-    Deck: {
-        screen: Deck,
-        navigationOptions: ({navigation}) => ({
-            title: navigation.state.params.deck.title,
-            headerTintColor: white,
-            headerStyle: {
-                backgroundColor: oxfordBlue,
-            },
-        })
-    },
-    NewQuestion: {
-        screen: NewQuestion,
-        navigationOptions: {
-            title: 'Add Card',
-            headerTintColor: white,
-            headerStyle: {
-                backgroundColor: oxfordBlue,
-            },
-        }
-    },
-    Quiz: {
-        screen: Quiz,
-        navigationOptions: {
-            title: 'Quiz',
-            headerTintColor: white,
-            headerStyle: {
-                backgroundColor: oxfordBlue,
-            },
-        }
-    },
-})
 
 export default App

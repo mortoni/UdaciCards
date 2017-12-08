@@ -30,6 +30,7 @@ class NewDeck extends Component {
     }
 
     render() {
+        const { title } = this.state
         return(
             <View style={ styles.container }>
                 <Form style={ styles.form }>
@@ -40,7 +41,8 @@ class NewDeck extends Component {
 
                     <View style={styles.buttons}>
                         <TouchableOpacity style={styles.buttonCreate}
-                                          onPress={this.createDeck}>
+                                          onPress={this.createDeck}
+                                          disabled={title === ''}>
                             <Text style={styles.textCreate}>Add New Deck</Text>
                         </TouchableOpacity>
                     </View>
@@ -54,4 +56,4 @@ const mapDispatchToProps = (dispatch) => ({
   addDeck: (deck) => dispatch(addDeck(deck)),
 })
 
-export default connect(() => ({}), mapDispatchToProps)(NewDeck);
+export default connect(null, mapDispatchToProps)(NewDeck);

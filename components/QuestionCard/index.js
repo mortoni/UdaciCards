@@ -18,7 +18,7 @@ const QuestionCard = (props) => {
         <View style={ styles.container }>
             <Text style={ styles.txtProgress }>Card: { progress }/{ total }</Text>
             <View style={ styles.card }>
-                <Card {...card}/>
+                <Card { ...card }/>
             </View>
 
             <View style={ styles.buttons }>
